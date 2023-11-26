@@ -2,8 +2,3 @@ streamlit>=0.88
 streamlit-drawable-canvas>=0.8
 svgpathtools
 svgwrite
-tensorflow
-torch
-torchvision
-PIL
-io
