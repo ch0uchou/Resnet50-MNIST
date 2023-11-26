@@ -4,3 +4,6 @@ svgpathtools
 svgwrite
 tensorflow
 torch
+torchvision
+PIL
+io
