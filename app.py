@@ -37,14 +37,15 @@ else:
     b_color = "#FFFFFF"  
     bg_color = "#000000"
     drawing_mode = True  
-
-    image_data = st_canvas(
-        b_width,
-        b_color,  
-        bg_color,  
-        height=150,  
-        width=150,  
-        drawing_mode=drawing_mode,
+    canvas_result = st_canvas(
+        stroke_width=b_width,
+        stroke_color=b_color,
+        background_color=bg_color,
+        height=150,
+        width=150,
+        drawing_mode='freedraw' if drawing_mode else 'transform',
         key="canvas",  
     )
-    st.image(image_data)
+    if canvas_result.image_data is not None:
+        image = Image.fromarray(canvas_result.image_data.astype('uint8'), 'RGBA')
+        st.image(image)
