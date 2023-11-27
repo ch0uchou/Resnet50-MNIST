@@ -33,10 +33,11 @@ if file is not None:
     st.write(predicted_class[0])
 else:
     st.write("## Draw something")
-    b_width = 10       
-    b_color = "#FFFFFF"  
+    b_width = 10
+    b_color = "#FFFFFF"
     bg_color = "#000000"
     drawing_mode = True  
+    
     canvas_result = st_canvas(
         stroke_width=b_width,
         stroke_color=b_color,
@@ -44,19 +45,28 @@ else:
         height=150,
         width=150,
         drawing_mode='freedraw' if drawing_mode else 'transform',
-        key="canvas",  
+        key="canvas",
     )
+    
     if canvas_result.image_data is not None:
-        image = Image.fromarray(canvas_result.image_data.astype('uint8'), 'RGBA')
-        image = load_img(image, color_mode='grayscale' if model.input_shape[-1] == 1 else 'rgb', target_size=(28, 28))
-        image = img_to_array(image)
-        image = image.astype('float32')
-        image /= 255.0
-
-        if model.input_shape[-1] == 1 and image.shape[-1] == 3:
-            image = image.mean(axis=-1, keepdims=True)
-        image = np.expand_dims(image, axis=0)
-        prediction = model.predict(image)
+        
+        image_data = canvas_result.image_data
+        
+        image_data = image_data[:, :, :3]
+        if model.input_shape[-1] == 1:
+            
+            image_data = np.mean(image_data, axis=2, keepdims=True)
+        
+        image_data = image_data.astype('float32') / 255.0
+        image = Image.fromarray(image_data.squeeze().astype('uint8'))  
+        image = image.resize((28, 28), Image.ANTIALIAS)
+        image_array = img_to_array(image)  
+        if model.input_shape[-1] == 1 and image_array.shape[-1] == 3:
+            
+            image_array = image_array.mean(axis=-1, keepdims=True)
+        image_array = np.expand_dims(image_array, axis=0)  
+        
+        prediction = model.predict(image_array)
         predicted_class = np.argmax(prediction, axis=1)
         st.write("## Prediction class")
         st.write(predicted_class[0])
