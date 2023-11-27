@@ -48,7 +48,7 @@ else:
         key="canvas",
     )
     
-    if canvas_result.image_data is not None:
+    if canvas_result is not None:
         
         image_data = canvas_result.image_data
         
