@@ -39,12 +39,12 @@ else:
     drawing_mode = True  
 
     image_data = st_canvas(
-    fill_color=b_color,  
-    stroke_width=b_width,  
-    background_color=bg_color,  
-    height=150,  
-    width=150,  
-    drawing_mode="freedraw" if drawing_mode else "transform",
-    key="canvas",  
+        b_width 
+        b_color,  
+        bg_color,  
+        height=150,  
+        width=150,  
+        drawing_mode=drawing_mode,
+        key="canvas",  
     )
     st.image(image_data)
