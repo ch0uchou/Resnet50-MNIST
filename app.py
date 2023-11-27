@@ -6,7 +6,6 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.image import load_img, img_to_array
 import numpy as np
 from PIL import Image
-from train import iou
 
 
 st.title('ResNet50')
@@ -15,8 +14,7 @@ st.header('Please upload an image')
 
 file = st.file_uploader('', type=['jpeg', 'jpg', 'png'])
 
-with CustomObjectScope({'iou': iou}):
-    model = load_model("mnist_resnet50.h5")
+model = load_model("mnist_resnet50.h5")
 
 if file is not None:
     image = load_img(file, color_mode='grayscale' if model.input_shape[-1] == 1 else 'rgb', target_size=(28, 28))
