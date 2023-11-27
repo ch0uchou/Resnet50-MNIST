@@ -48,4 +48,14 @@ else:
     )
     if canvas_result.image_data is not None:
         image = Image.fromarray(canvas_result.image_data.astype('uint8'), 'RGBA')
-        st.image(image)
+        image = img_to_array(image)
+        image = image.astype('float32')
+        image /= 255.0
+
+        if model.input_shape[-1] == 1 and image.shape[-1] == 3:
+            image = image.mean(axis=-1, keepdims=True)
+        image = np.expand_dims(image, axis=0)
+        prediction = model.predict(image)
+        predicted_class = np.argmax(prediction, axis=1)
+        st.write("## Prediction class")
+        st.write(predicted_class[0])
