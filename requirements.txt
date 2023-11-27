@@ -1,4 +1,7 @@
-streamlit
-pandas
-Pillow
-streamlit_canvas
+numpy==1.23.5
+streamlit==1.22.0
+Pillow==9.5.0
+keras==2.14.0
+tensorflow==2.14.0
+opencv-python-headless
+scikit-learn
