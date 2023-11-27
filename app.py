@@ -17,6 +17,7 @@ file = st.file_uploader('', type=['jpeg', 'jpg', 'png'])
 model = load_model("mnist_resnet50.h5")
 
 if file is not None:
+    st.image(file)
     image = load_img(file, color_mode='grayscale' if model.input_shape[-1] == 1 else 'rgb', target_size=(28, 28))
     image = img_to_array(image)
     image = image.astype('float32')
