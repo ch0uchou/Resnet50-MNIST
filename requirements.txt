@@ -1,5 +1,5 @@
 numpy==1.23.5
-streamlit==1.22.0
+streamlit
 Pillow==9.5.0
 keras==2.14.0
 tensorflow==2.14.0
