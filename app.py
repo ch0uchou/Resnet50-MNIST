@@ -28,4 +28,4 @@ if file is not None:
     prediction = model.predict(image)
     predicted_class = np.argmax(prediction, axis=1)
     st.write("## Prediction class")
-    st.image(predicted_class[0])
+    st.image({predicted_class[0]})
