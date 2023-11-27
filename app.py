@@ -6,6 +6,7 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.image import load_img, img_to_array
 import numpy as np
 from PIL import Image
+from streamlit_drawable_canvas import st_canvas
 
 
 st.title('ResNet50')
@@ -30,3 +31,20 @@ if file is not None:
     predicted_class = np.argmax(prediction, axis=1)
     st.write("## Prediction class")
     st.write(predicted_class[0])
+else:
+    st.write("## Draw something")
+    b_width = 10       
+    b_color = "#FFFFFF"  
+    bg_color = "#000000"
+    drawing_mode = True  
+
+    image_data = st_canvas(
+    fill_color=b_color,  
+    stroke_width=b_width,  
+    background_color=bg_color,  
+    height=150,  
+    width=150,  
+    drawing_mode="freedraw" if drawing_mode else "transform",
+    key="canvas",  
+    )
+    st.image(image_data)
