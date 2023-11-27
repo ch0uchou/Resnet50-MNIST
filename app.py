@@ -48,6 +48,7 @@ else:
     )
     if canvas_result.image_data is not None:
         image = Image.fromarray(canvas_result.image_data.astype('uint8'), 'RGBA')
+        image = load_img(image, color_mode='grayscale' if model.input_shape[-1] == 1 else 'rgb', target_size=(28, 28))
         image = img_to_array(image)
         image = image.astype('float32')
         image /= 255.0
