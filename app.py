@@ -7,6 +7,8 @@ from tensorflow.keras.preprocessing.image import load_img, img_to_array
 import numpy as np
 from PIL import Image
 from streamlit_drawable_canvas import st_canvas
+import json
+
 
 
 st.title('ResNet50')
@@ -48,7 +50,7 @@ else:
         key="canvas",
     )
     
-    if canvas_result is not None:
+    if canvas_result.json_data is not None:
         
         image_data = canvas_result.image_data
         
