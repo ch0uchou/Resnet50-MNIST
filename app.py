@@ -39,7 +39,7 @@ else:
     drawing_mode = True  
 
     image_data = st_canvas(
-        b_width 
+        b_width,
         b_color,  
         bg_color,  
         height=150,  
